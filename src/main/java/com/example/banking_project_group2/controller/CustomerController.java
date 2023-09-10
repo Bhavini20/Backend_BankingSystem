@@ -21,7 +21,12 @@ public class CustomerController {
 	public Customer getCustomerById(@PathVariable int id) {
 		return custrepo.findById(id);
 	}
-	
+
+	@GetMapping("/{username}")
+	public Customer getCustomerByUsername(@PathVariable String username){
+		return custrepo.findByUsername(username);
+	}
+
 	@PostMapping("/register")
 	public Customer addCustomer(@RequestBody Customer cust) {
 		return custrepo.save(cust);

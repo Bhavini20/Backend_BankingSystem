@@ -13,11 +13,11 @@ public class Customer {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;
@@ -34,9 +34,9 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name = "name",nullable=false,unique=true)
-	private String name;
+
+	@Column(name = "username",nullable=false,unique=true)
+	private String username;
 	@Column(name = "password")
 	private String password;
 	@Column(name = "age")
@@ -46,10 +46,10 @@ public class Customer {
 		
 	}
 	
-	public Customer(int id, String name, String password, int age) {
+	public Customer(int id, String username, String password, int age) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.username = username;
 		this.password = password;
 		this.age = age;
 	}

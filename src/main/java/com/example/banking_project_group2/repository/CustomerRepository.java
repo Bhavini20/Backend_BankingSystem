@@ -8,4 +8,5 @@ import com.example.banking_project_group2.model.Customer;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	public Customer findById(int id);
+	public Customer findByUsername(String username);
 }
