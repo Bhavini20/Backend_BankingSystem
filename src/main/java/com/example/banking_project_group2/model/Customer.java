@@ -3,9 +3,12 @@ package com.example.banking_project_group2.model;
 
 //import jakarta.persistence.Entity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "customer")
+
 public class Customer {
 	public int getId() {
 		return id;
@@ -36,7 +39,10 @@ public class Customer {
 	private int id;
 	
 	@Column(name = "name",nullable=false,unique=true)
+	@Size(min=3)
 	private String name;
+	@Size(min=8)
+	@NotEmpty
 	@Column(name = "password")
 	private String password;
 	@Column(name = "age")
