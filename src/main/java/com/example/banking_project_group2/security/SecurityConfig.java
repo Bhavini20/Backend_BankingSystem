@@ -32,7 +32,7 @@ public class SecurityConfig {
                 		accessDeniedPage("/error/access-denied"))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**")
+                        .requestMatchers("/api/auth/**")
                         .permitAll()
                         .anyRequest().authenticated());
 //        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePa)
