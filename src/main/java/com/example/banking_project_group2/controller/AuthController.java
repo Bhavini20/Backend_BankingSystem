@@ -4,6 +4,7 @@ import com.example.banking_project_group2.dto.LoginDTO;
 import com.example.banking_project_group2.dto.RegisterDTO;
 import com.example.banking_project_group2.model.Customer;
 import com.example.banking_project_group2.repository.CustomerRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public Customer register(@RequestBody RegisterDTO registerDTO){
+    public Customer register(@Valid @RequestBody RegisterDTO registerDTO){
         if(customerRepository.findByUsername(registerDTO.getUsername()) != null){
             return new Customer(0, "null", "null", 0);
         }
@@ -47,7 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO){
+    public ResponseEntity<String> login(@Valid @RequestBody LoginDTO loginDTO){
         System.out.println("[/login]");
         Customer customer = customerRepository.findByUsername(loginDTO.getUsername());
         if(customer == null) return new ResponseEntity<>("No such user found", HttpStatusCode.valueOf(403));
