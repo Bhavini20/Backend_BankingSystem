@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "customer")
@@ -46,10 +48,14 @@ public class Customer {
 	private int id;
 
 	@Column(name = "username",nullable=false,unique=true)
+	@Size(min=3)
 	private String username;
-	@Column(name = "password")
+
+	@Column(name = "password",nullable=false)
+	@Size(min=8)
 	private String password;
-	@Column(name = "age")
+
+	@Column(name = "age",nullable=false)
 	private int age;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="cust_id")

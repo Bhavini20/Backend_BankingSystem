@@ -29,7 +29,61 @@ public class Account {
 	@Column
 	private int balance;
 	
+	@Column
+	private String first_name;
 	
+	@Column
+	private String last_name;
+	
+	@Column
+	private String address;
+	
+	@Column
+	private String aadhar_no;
+	
+	@Column
+	private String occupation;
+	
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getAadhar_no() {
+		return aadhar_no;
+	}
+
+	public void setAadhar_no(String aadhar_no) {
+		this.aadhar_no = aadhar_no;
+	}
+
+	public String getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cust_id")
 	private Customer cust_id;
@@ -44,10 +98,18 @@ public class Account {
 		
 	}
 	
-	public Account(Integer account_no, String account_type, Integer balance, Customer cust_id) {
+
+	public Account(int account_no, String account_type, int balance, String first_name, String last_name,
+			String address, String aadhar_no, String occupation, Customer cust_id) {
+		super();
 		this.account_no = account_no;
 		this.account_type = account_type;
 		this.balance = balance;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.address = address;
+		this.aadhar_no = aadhar_no;
+		this.occupation = occupation;
 		this.cust_id = cust_id;
 	}
 

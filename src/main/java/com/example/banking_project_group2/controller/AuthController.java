@@ -6,6 +6,7 @@ import com.example.banking_project_group2.model.Customer;
 import com.example.banking_project_group2.repository.CustomerRepository;
 import com.example.banking_project_group2.security.JWTGen;
 import com.example.banking_project_group2.dto.AuthResponseDTO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -38,8 +39,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public Customer register(@RequestBody RegisterDTO registerDTO){
-    	System.out.println("[/register]");
+
+    public Customer register(@Valid @RequestBody RegisterDTO registerDTO){
         if(customerRepository.findByUsername(registerDTO.getUsername()) != null){
             return new Customer(0, "null", "null", 0);
         }
@@ -53,7 +54,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginDTO loginDTO){
+    public ResponseEntity<String> login(@Valid @RequestBody LoginDTO loginDTO){
         System.out.println("[/login]");
         Authentication auth = authenticationManager.authenticate(
         		new UsernamePasswordAuthenticationToken(
