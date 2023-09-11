@@ -3,6 +3,7 @@ package com.example.banking_project_group2.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -86,6 +87,7 @@ public class Account {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cust_id")
+	@JsonBackReference
 	private Customer cust_id;
 	
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="to_acc")

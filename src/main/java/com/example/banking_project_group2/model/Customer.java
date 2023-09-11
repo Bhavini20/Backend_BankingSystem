@@ -4,6 +4,7 @@ package com.example.banking_project_group2.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 //import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
@@ -59,12 +60,17 @@ public class Customer {
 	private int age;
 	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="cust_id")
+	@JsonManagedReference
 	private List<Account> account = new ArrayList<>();
 	
 	public Customer() {
 		
 	}
-	
+
+	public List<Account> getAccounts(){
+		return account;
+	}
+
 	public Customer(int id, String username, String password, int age) {
 		super();
 		this.id = id;
