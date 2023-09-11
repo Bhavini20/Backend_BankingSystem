@@ -5,13 +5,11 @@ import lombok.Data;
 @Data
 public class AccountDTO {
 
-	private int account_no;
-	
 	private String account_type;
 	
 	private int balance;
 	
-private String first_name;
+	private String first_name;
 	
 	
 	private String last_name;
@@ -22,22 +20,14 @@ private String first_name;
 	
 	private String occupation;
 	
-	private int cust_id;
-	public int getCust_id() {
-		return cust_id;
-	}
-
-	public void setCust_id(int cust_id) {
-		this.cust_id = cust_id;
-	}
-
-	public int getAccount_no() {
-		return account_no;
-	}
-
-	public void setAccount_no(int account_no) {
-		this.account_no = account_no;
-	}
+//	private int cust_id;
+//	public int getCust_id() {
+//		return cust_id;
+//	}
+//
+//	public void setCust_id(int cust_id) {
+//		this.cust_id = cust_id;
+//	}
 
 	public String getAccount_type() {
 		return account_type;

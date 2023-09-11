@@ -1,20 +1,18 @@
 package com.example.banking_project_group2.controller;
 
+import com.example.banking_project_group2.dto.AuthResponseDTO;
 import com.example.banking_project_group2.dto.LoginDTO;
 import com.example.banking_project_group2.dto.RegisterDTO;
 import com.example.banking_project_group2.model.Customer;
 import com.example.banking_project_group2.repository.CustomerRepository;
 import com.example.banking_project_group2.security.JWTGen;
-import com.example.banking_project_group2.dto.AuthResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,7 +52,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginDTO loginDTO){
+    public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginDTO loginDTO){
         System.out.println("[/login]");
         Authentication auth = authenticationManager.authenticate(
         		new UsernamePasswordAuthenticationToken(
@@ -62,7 +60,6 @@ public class AuthController {
         				loginDTO.getPassword()
         				)
         		);
-//        System.out.println("";)
         SecurityContextHolder.getContext().setAuthentication(auth);
         String token = jwtgen.generateToken(auth);
         
