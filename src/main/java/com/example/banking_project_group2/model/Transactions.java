@@ -4,11 +4,14 @@ import java.sql.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,13 +24,15 @@ public class Transactions{
 	private int transaction_id;
 	
 	@Column
-	@DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date trans_time;
 	
-	@Column
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="from_acc")
 	private Account from_acc;	
 
-	@Column
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="to_acc")
 	private Account to_acc;
 	
 	@Column
@@ -39,7 +44,7 @@ public class Transactions{
 		
 	}
 	
-	public Transactions(int transaction_id, Date trans_time, Account from_acc, Account to_acc, int amount) {
+	public Transactions(int transaction_id, Date trans_time, int amount, Account from_acc, Account to_acc) {
 		super();
 		this.transaction_id = transaction_id;
 		this.trans_time = trans_time;

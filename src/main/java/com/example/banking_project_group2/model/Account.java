@@ -13,7 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.transaction.Transaction;
+import com.example.banking_project_group2.model.Transactions;
 
 @Entity
 @Table(name="account")
@@ -34,8 +34,11 @@ public class Account {
 	@JoinColumn(name="cust_id")
 	private Customer cust_id;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="transact_id")
-	private List<Transaction> transaction = new ArrayList<>();
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="to_acc")
+	private List<Transactions> to_transaction = new ArrayList<>();
+//	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="from_acc")
+	private List<Transactions> from_transaction = new ArrayList<>();
 	
 	public Account() {
 		
