@@ -9,16 +9,18 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-//    @Autowired
-//    private JwtAuthEntryPoint authEntryPoint;
+    @Autowired
+    private JwtAuthEntryPoint authEntryPoint;
     @Autowired
     private CustomerAuthService userDetailsService;
 
@@ -26,11 +28,15 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
+                .exceptionHandling(exc -> exc.authenticationEntryPoint(authEntryPoint).
+                		accessDeniedPage("/error/access-denied"))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**")
+                        .requestMatchers("/api/auth/**")
                         .permitAll()
                         .anyRequest().authenticated());
-//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePa)
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
@@ -45,8 +51,8 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public  JWTAuthenticationFilter jwtAuthenticationFilter() {
-//        return new JWTAuthenticationFilter();
-//    }
+    @Bean
+    public  JWTAuthFilter jwtAuthenticationFilter() {
+        return new JWTAuthFilter();
+    }
 }

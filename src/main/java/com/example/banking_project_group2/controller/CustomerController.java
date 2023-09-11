@@ -17,12 +17,13 @@ public class CustomerController {
 	@Autowired
 	private CustomerRepository custrepo;
 	
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public Customer getCustomerById(@PathVariable int id) {
+		System.out.println("[/api/customer/id]");
 		return custrepo.findById(id);
 	}
 
-	@GetMapping("/{username}")
+	@GetMapping("/username/{username}")
 	public Customer getCustomerByUsername(@PathVariable String username){
 		return custrepo.findByUsername(username);
 	}
