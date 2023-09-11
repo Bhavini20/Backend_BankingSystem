@@ -1,11 +1,19 @@
 package com.example.banking_project_group2.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import com.example.banking_project_group2.model.Transactions;
 
 @Entity
 @Table(name="account")
@@ -21,14 +29,22 @@ public class Account {
 	@Column
 	private int balance;
 	
-	@Column
-	private int cust_id;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="cust_id")
+	private Customer cust_id;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="to_acc")
+	private List<Transactions> to_transaction = new ArrayList<>();
+//	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="from_acc")
+	private List<Transactions> from_transaction = new ArrayList<>();
 	
 	public Account() {
 		
 	}
 	
-	public Account(Integer account_no, String account_type, Integer balance, Integer cust_id) {
+	public Account(Integer account_no, String account_type, Integer balance, Customer cust_id) {
 		this.account_no = account_no;
 		this.account_type = account_type;
 		this.balance = balance;
@@ -59,11 +75,11 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public int getCust_id() {
+	public Customer getCust_id() {
 		return cust_id;
 	}
 
-	public void setCust_id(int cust_id) {
+	public void setCust_id(Customer cust_id) {
 		this.cust_id = cust_id;
 	}
 	
