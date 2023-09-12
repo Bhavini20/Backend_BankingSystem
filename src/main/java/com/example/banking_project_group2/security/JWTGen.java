@@ -20,7 +20,7 @@ public class JWTGen {
 	public String generateToken(Authentication auth) {
 		String username = auth.getName();
 		Date currentDate = new Date();
-		Date expireDate = new Date(currentDate.getTime() + 70000);
+		Date expireDate = new Date(currentDate.getTime() + 70000000);
 		
 		String token = Jwts.builder().setSubject(username).setIssuedAt(currentDate).
 				setExpiration(expireDate)

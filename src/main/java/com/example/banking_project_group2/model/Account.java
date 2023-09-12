@@ -1,9 +1,11 @@
 package com.example.banking_project_group2.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,7 +16,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import com.example.banking_project_group2.model.Transactions;
 
 @Entity
 @Table(name="account")
@@ -40,11 +41,46 @@ public class Account {
 	private String address;
 	
 	@Column
-	private String aadhar_no;
+	private Integer aadhar_no;
 	
 	@Column
 	private String occupation;
 	
+	@Column
+	private String emailId;
+	
+	@Column
+	private int mobile;
+	
+	@Column
+	private Date dob;
+	
+
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public int getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(int mobile) {
+		this.mobile = mobile;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -69,11 +105,11 @@ public class Account {
 		this.address = address;
 	}
 
-	public String getAadhar_no() {
+	public Integer getAadhar_no() {
 		return aadhar_no;
 	}
 
-	public void setAadhar_no(String aadhar_no) {
+	public void setAadhar_no(Integer aadhar_no) {
 		this.aadhar_no = aadhar_no;
 	}
 
@@ -102,7 +138,8 @@ public class Account {
 	
 
 	public Account(int account_no, String account_type, int balance, String first_name, String last_name,
-			String address, String aadhar_no, String occupation, Customer cust_id) {
+			String address, int aadhar_no, String occupation, String emailId, int mobile, Date dob,
+			Customer cust_id) {
 		super();
 		this.account_no = account_no;
 		this.account_type = account_type;
@@ -112,6 +149,9 @@ public class Account {
 		this.address = address;
 		this.aadhar_no = aadhar_no;
 		this.occupation = occupation;
+		this.emailId = emailId;
+		this.mobile = mobile;
+		this.dob = dob;
 		this.cust_id = cust_id;
 	}
 

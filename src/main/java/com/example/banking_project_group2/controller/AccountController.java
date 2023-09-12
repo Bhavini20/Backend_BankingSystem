@@ -42,6 +42,9 @@ public class AccountController {
 		ac.setFirst_name(account.getFirst_name());
 		ac.setLast_name(account.getLast_name());
 		ac.setOccupation(account.getOccupation());
+		ac.setDob(account.getDob());
+		ac.setEmailId(account.getEmailId());
+		ac.setMobile(account.getMobile());
 		return acc.save(ac);
 	}
 

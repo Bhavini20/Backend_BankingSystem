@@ -1,5 +1,10 @@
 package com.example.banking_project_group2.dto;
 
+import java.util.Date;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
@@ -9,16 +14,57 @@ public class AccountDTO {
 	
 	private int balance;
 	
+	  @NotBlank(message = "Customer first name is required")
 	private String first_name;
 	
-	
+	  @NotBlank(message = "Customer last name is required")
 	private String last_name;
 	
+	  @NotBlank(message = "Address name is required")
 	private String address;
 	
-	private String aadhar_no;
+	  @NotBlank(message = "Aadhar number is required")
+	  @Size(min=12, max=12)
+	  private int aadhar_no;
 	
 	private String occupation;
+	
+	@NotBlank(message = "Email id is required")
+	@Email
+	private String emailId;
+	
+	  @NotBlank(message = "mobile no is required")
+	  @Size(min=10, max=10)
+	private int mobile;
+	  
+	  @NotBlank(message= "DoB is required")
+	  private Date dob;
+	
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public int getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(int mobile) {
+		this.mobile = mobile;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	
 	
 //	private int cust_id;
 //	public int getCust_id() {
@@ -69,11 +115,11 @@ public class AccountDTO {
 		this.address = address;
 	}
 
-	public String getAadhar_no() {
+	public Integer getAadhar_no() {
 		return aadhar_no;
 	}
 
-	public void setAadhar_no(String aadhar_no) {
+	public void setAadhar_no(int aadhar_no) {
 		this.aadhar_no = aadhar_no;
 	}
 
