@@ -41,7 +41,7 @@ public class Account {
 	private String address;
 	
 	@Column
-	private Integer aadhar_no;
+	private String aadhar_no;
 	
 	@Column
 	private String occupation;
@@ -50,7 +50,7 @@ public class Account {
 	private String emailId;
 	
 	@Column
-	private int mobile;
+	private String mobile;
 	
 	@Column
 	private Date dob;
@@ -65,11 +65,11 @@ public class Account {
 		this.emailId = emailId;
 	}
 
-	public int getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
 
-	public void setMobile(int mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
@@ -105,11 +105,11 @@ public class Account {
 		this.address = address;
 	}
 
-	public Integer getAadhar_no() {
+	public String getAadhar_no() {
 		return aadhar_no;
 	}
 
-	public void setAadhar_no(Integer aadhar_no) {
+	public void setAadhar_no(String aadhar_no) {
 		this.aadhar_no = aadhar_no;
 	}
 
@@ -138,7 +138,7 @@ public class Account {
 	
 
 	public Account(int account_no, String account_type, int balance, String first_name, String last_name,
-			String address, int aadhar_no, String occupation, String emailId, int mobile, Date dob,
+			String address, String aadhar_no, String occupation, String emailId, String mobile, Date dob,
 			Customer cust_id) {
 		super();
 		this.account_no = account_no;

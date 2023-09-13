@@ -25,7 +25,7 @@ public class AccountDTO {
 	
 	  @NotBlank(message = "Aadhar number is required")
 	  @Size(min=12, max=12)
-	  private int aadhar_no;
+	  private String aadhar_no;
 	
 	private String occupation;
 	
@@ -35,7 +35,7 @@ public class AccountDTO {
 	
 	  @NotBlank(message = "mobile no is required")
 	  @Size(min=10, max=10)
-	private int mobile;
+	private String mobile;
 	  
 	  @NotBlank(message= "DoB is required")
 	  private Date dob;
@@ -48,11 +48,11 @@ public class AccountDTO {
 		this.emailId = emailId;
 	}
 
-	public int getMobile() {
+	public String getMobile() {
 		return mobile;
 	}
 
-	public void setMobile(int mobile) {
+	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
 
@@ -115,11 +115,11 @@ public class AccountDTO {
 		this.address = address;
 	}
 
-	public Integer getAadhar_no() {
+	public String getAadhar_no() {
 		return aadhar_no;
 	}
 
-	public void setAadhar_no(int aadhar_no) {
+	public void setAadhar_no(String aadhar_no) {
 		this.aadhar_no = aadhar_no;
 	}
 
