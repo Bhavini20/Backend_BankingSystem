@@ -9,27 +9,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.banking_project_group2.model.Customer;
-import com.example.banking_project_group2.repository.CustomerRepository;
+import com.example.banking_project_group2.service.CustomerService;
 
 @RestController
 @RequestMapping("/api/customer")
 public class CustomerController {
+	
 	@Autowired
-	private CustomerRepository custrepo;
+	private CustomerService custSer;
+	
 	
 	@GetMapping("/id/{id}")
 	public Customer getCustomerById(@PathVariable int id) {
-		System.out.println("[/api/customer/id]");
-		return custrepo.findById(id);
+		return custSer.getCustomerById(id);
 	}
 
 	@GetMapping("/username/{username}")
 	public Customer getCustomerByUsername(@PathVariable String username){
-		return custrepo.findByUsername(username);
+		return custSer.getCustomerByUsername(username);
 	}
 
 	@PostMapping("/register")
 	public Customer addCustomer(@RequestBody Customer cust) {
-		return custrepo.save(cust);
+		return custSer.addCustomer(cust);
 	}
 }
