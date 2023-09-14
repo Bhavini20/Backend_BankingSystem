@@ -1,8 +1,11 @@
 package com.example.banking_project_group2.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -29,10 +32,14 @@ public class Transactions{
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="from_acc")
+	@JsonBackReference
+	@JsonProperty
 	private Account from_acc;	
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="to_acc")
+	@JsonBackReference
+	@JsonProperty
 	private Account to_acc;
 	
 	@Column
@@ -65,8 +72,8 @@ public class Transactions{
 		return trans_time;
 	}
 
-	public void setTrans_time(Date trans_time) {
-		this.trans_time = trans_time;
+	public void setTrans_time(Date date) {
+		this.trans_time = date;
 	}
 
 	public Account getFrom_acc() {

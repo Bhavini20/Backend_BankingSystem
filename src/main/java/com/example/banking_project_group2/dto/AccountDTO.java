@@ -40,6 +40,8 @@ public class AccountDTO {
 	 
 	
 	  private Date dob;
+	  
+//	  private boolean intBanking;
 	
 	public String getEmailId() {
 		return emailId;
