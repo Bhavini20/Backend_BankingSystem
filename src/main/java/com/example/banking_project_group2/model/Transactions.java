@@ -45,18 +45,34 @@ public class Transactions{
 	@Column
 	private int amount;
 	
-	
+	@Column 
+	private boolean status;
 	
 	public Transactions() {
 		
 	}
 	
-	public Transactions(int transaction_id, Date trans_time, int amount, Account from_acc, Account to_acc) {
+	public Transactions(int transaction_id, Date trans_time, int amount, Account from_acc, Account to_acc, boolean status) {
 		super();
 		this.transaction_id = transaction_id;
 		this.trans_time = trans_time;
 		this.from_acc = from_acc;
 		this.to_acc = to_acc;
+		this.amount = amount;
+		this.status = status;
+	}
+	
+	
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
