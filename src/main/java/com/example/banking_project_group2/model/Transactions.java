@@ -1,8 +1,11 @@
 package com.example.banking_project_group2.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -29,27 +32,47 @@ public class Transactions{
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="from_acc")
+	@JsonBackReference
+	@JsonProperty
 	private Account from_acc;	
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="to_acc")
+	@JsonBackReference
+	@JsonProperty
 	private Account to_acc;
 	
 	@Column
 	private int amount;
 	
-	
+	@Column 
+	private boolean status;
 	
 	public Transactions() {
 		
 	}
 	
-	public Transactions(int transaction_id, Date trans_time, int amount, Account from_acc, Account to_acc) {
+	public Transactions(int transaction_id, Date trans_time, int amount, Account from_acc, Account to_acc, boolean status) {
 		super();
 		this.transaction_id = transaction_id;
 		this.trans_time = trans_time;
 		this.from_acc = from_acc;
 		this.to_acc = to_acc;
+		this.amount = amount;
+		this.status = status;
+	}
+	
+	
+
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
@@ -65,8 +88,8 @@ public class Transactions{
 		return trans_time;
 	}
 
-	public void setTrans_time(Date trans_time) {
-		this.trans_time = trans_time;
+	public void setTrans_time(Date date) {
+		this.trans_time = date;
 	}
 
 	public Account getFrom_acc() {

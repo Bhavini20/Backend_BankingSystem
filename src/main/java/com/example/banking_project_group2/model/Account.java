@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -54,6 +55,82 @@ public class Account {
 	
 	@Column
 	private Date dob;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="cust_id")
+	@JsonBackReference
+	private Customer cust_id;
+	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="to_acc")
+	@JsonManagedReference
+	private List<Transactions> to_transaction = new ArrayList<>();
+//	
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="from_acc")
+	@JsonManagedReference
+	private List<Transactions> from_transaction = new ArrayList<>();
+	
+	public List<Transactions> getToTransactions(){
+		return to_transaction;
+	}
+	
+	public List<Transactions> getFromTransactions(){
+		return from_transaction;
+	}
+	
+	public Account() {
+		
+	}
+	
+
+	public Account(int account_no, String account_type, int balance, String first_name, String last_name,
+			String address, String aadhar_no, String occupation, String emailId, String mobile, Date dob,
+			Customer cust_id) {
+		super();
+		this.account_no = account_no;
+		this.account_type = account_type;
+		this.balance = balance;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.address = address;
+		this.aadhar_no = aadhar_no;
+		this.occupation = occupation;
+		this.emailId = emailId;
+		this.mobile = mobile;
+		this.dob = dob;
+		this.cust_id = cust_id;
+	}
+
+	public int getAccount_no() {
+		return account_no;
+	}
+
+	public void setAccount_no(int account_no) {
+		this.account_no = account_no;
+	}
+
+	public String getAccount_type() {
+		return account_type;
+	}
+
+	public void setAccount_type(String account_type) {
+		this.account_type = account_type;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
+	public Customer getCust_id() {
+		return cust_id;
+	}
+
+	public void setCust_id(Customer cust_id) {
+		this.cust_id = cust_id;
+	}
 	
 
 
@@ -119,72 +196,6 @@ public class Account {
 
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
-	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="cust_id")
-	@JsonBackReference
-	private Customer cust_id;
-	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="to_acc")
-	private List<Transactions> to_transaction = new ArrayList<>();
-//	
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="from_acc")
-	private List<Transactions> from_transaction = new ArrayList<>();
-	
-	public Account() {
-		
-	}
-	
-
-	public Account(int account_no, String account_type, int balance, String first_name, String last_name,
-			String address, String aadhar_no, String occupation, String emailId, String mobile, Date dob,
-			Customer cust_id) {
-		super();
-		this.account_no = account_no;
-		this.account_type = account_type;
-		this.balance = balance;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.address = address;
-		this.aadhar_no = aadhar_no;
-		this.occupation = occupation;
-		this.emailId = emailId;
-		this.mobile = mobile;
-		this.dob = dob;
-		this.cust_id = cust_id;
-	}
-
-	public int getAccount_no() {
-		return account_no;
-	}
-
-	public void setAccount_no(int account_no) {
-		this.account_no = account_no;
-	}
-
-	public String getAccount_type() {
-		return account_type;
-	}
-
-	public void setAccount_type(String account_type) {
-		this.account_type = account_type;
-	}
-
-	public int getBalance() {
-		return balance;
-	}
-
-	public void setBalance(int balance) {
-		this.balance = balance;
-	}
-
-	public Customer getCust_id() {
-		return cust_id;
-	}
-
-	public void setCust_id(Customer cust_id) {
-		this.cust_id = cust_id;
 	}
 	
 	
