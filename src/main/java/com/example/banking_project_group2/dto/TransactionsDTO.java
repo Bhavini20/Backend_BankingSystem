@@ -21,7 +21,7 @@ public class TransactionsDTO {
 	private int to_acc;
 	private boolean status;
 	
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 	public void setStatus(boolean status) {
@@ -71,7 +71,7 @@ public class TransactionsDTO {
 		this.from_acc = T.getFrom_acc().getAccount_no();
 		this.to_acc =T.getTo_acc().getAccount_no();
 		this.trans_time = T.getTrans_time();
-		this.status=T.isStatus();
+		this.status=T.getStatus();
 		// TODO Auto-generated constructor stub
 	}
      public TransactionsDTO() {

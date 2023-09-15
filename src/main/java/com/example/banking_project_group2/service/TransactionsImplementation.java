@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.banking_project_group2.dto.TransactionsDTO;
+import com.example.banking_project_group2.exceptions.BalanceExceptions;
 import com.example.banking_project_group2.model.Account;
 import com.example.banking_project_group2.model.Transactions;
 import com.example.banking_project_group2.repository.AccountRepository;
@@ -46,25 +47,34 @@ public class TransactionsImplementation implements TransactionsService{
 		return trans;
 	}
 
-	public Transactions saveTransaction(TransactionsDTO transaction) {
+	public Transactions saveTransaction(TransactionsDTO transaction) throws BalanceExceptions {
 		Transactions t = new Transactions();
-		
-		t.setAmount(transaction.getAmount());
-		
 		
 		int facc = transaction.getFrom_acc();
 		Account f_acc = acc.findById(facc);
-		f_acc.setBalance(f_acc.getBalance()-transaction.getAmount());
-		t.setStatus(true);
+		
+		t.setAmount(transaction.getAmount());
 		
 		int tacc = transaction.getTo_acc();
 		Account t_acc = acc.findById(tacc);
-		t_acc.setBalance(t_acc.getBalance()+transaction.getAmount());
-		
 		
 		t.setFrom_acc(f_acc);
 		t.setTo_acc(t_acc);
 		t.setTrans_time(new Date());
+		
+		if(f_acc.getBalance()-transaction.getAmount()<0) {
+			t.setStatus(false);
+			tc.save(t); 
+			throw new BalanceExceptions("Insufficient Balance!");
+		}
+		else {
+			f_acc.setBalance(f_acc.getBalance()-transaction.getAmount());
+			t.setStatus(true);
+		}
+	
+		t_acc.setBalance(t_acc.getBalance()+transaction.getAmount());
+	
+
 		return tc.save(t); 
 	}
 

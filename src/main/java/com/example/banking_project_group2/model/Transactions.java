@@ -64,7 +64,7 @@ public class Transactions{
 	
 	
 
-	public boolean isStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 

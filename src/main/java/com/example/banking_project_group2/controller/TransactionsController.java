@@ -1,9 +1,6 @@
 package com.example.banking_project_group2.controller;
 
-import java.util.Date;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.banking_project_group2.dto.TransactionsDTO;
-import com.example.banking_project_group2.model.Account;
+import com.example.banking_project_group2.exceptions.BalanceExceptions;
 import com.example.banking_project_group2.model.Transactions;
 import com.example.banking_project_group2.repository.AccountRepository;
 import com.example.banking_project_group2.repository.TransactionsRepo;
@@ -50,7 +47,7 @@ public class TransactionsController {
 	}
 	
 	@PostMapping("/saveTransactions")
-	public Transactions saveTransaction(@RequestBody TransactionsDTO transaction) {
+	public Transactions saveTransaction(@RequestBody TransactionsDTO transaction) throws BalanceExceptions {
 		return ts.saveTransaction(transaction); 
 	}
 
