@@ -2,13 +2,9 @@ package com.example.banking_project_group2.controller;
 
 import java.util.List;
 
+import com.example.banking_project_group2.dto.TransactionsResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.banking_project_group2.dto.TransactionsDTO;
 import com.example.banking_project_group2.exceptions.BalanceExceptions;
@@ -18,6 +14,7 @@ import com.example.banking_project_group2.repository.TransactionsRepo;
 import com.example.banking_project_group2.service.TransactionsService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/transactions")
 public class TransactionsController {
 	
@@ -42,7 +39,7 @@ public class TransactionsController {
 	
 	
 	@GetMapping("/viewAllTransactions/id/{id}")
-	public List<TransactionsDTO> viewAllTransactions(@PathVariable int id){
+	public List<TransactionsResponseDTO> viewAllTransactions(@PathVariable int id){
 		return ts.viewAllTransactions(id);
 	}
 	

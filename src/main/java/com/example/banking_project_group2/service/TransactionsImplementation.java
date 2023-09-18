@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
+import com.example.banking_project_group2.dto.TransactionsResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,14 +36,14 @@ public class TransactionsImplementation implements TransactionsService{
 		return ac.getFromTransactions();
 	}
 	
-	public List<TransactionsDTO> viewAllTransactions(int id){
+	public List<TransactionsResponseDTO> viewAllTransactions(int id){
 		Account ac = acc.findById(id);
 		List<Transactions> to_trans = ac.getToTransactions();
 		List<Transactions> from_trans = ac.getFromTransactions();
 		List<Transactions> allTrans = Stream.concat(to_trans.stream(),from_trans.stream()).toList();
 		
-		List<TransactionsDTO> trans = new ArrayList<>();
-		allTrans.forEach(t -> trans.add(new TransactionsDTO(t)));
+		List<TransactionsResponseDTO> trans = new ArrayList<>();
+		allTrans.forEach(t -> trans.add(new TransactionsResponseDTO(t)));
 		
 		return trans;
 	}
@@ -73,7 +74,6 @@ public class TransactionsImplementation implements TransactionsService{
 		}
 	
 		t_acc.setBalance(t_acc.getBalance()+transaction.getAmount());
-	
 
 		return tc.save(t); 
 	}
