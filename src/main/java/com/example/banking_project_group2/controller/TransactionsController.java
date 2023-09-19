@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.example.banking_project_group2.dto.TransactionsResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.*;
+
 
 import com.example.banking_project_group2.dto.TransactionsDTO;
 import com.example.banking_project_group2.exceptions.BalanceExceptions;
@@ -27,6 +29,8 @@ public class TransactionsController {
 	@Autowired
 	TransactionsService ts;
 	
+	
+	
 	@GetMapping("/viewToTransactions/id/{id}")
 	public List<Transactions> viewToTransactions(@PathVariable int id) {
 		return ts.viewToTransactions(id);
@@ -45,8 +49,16 @@ public class TransactionsController {
 	
 	@PostMapping("/saveTransactions")
 	public Transactions saveTransaction(@RequestBody TransactionsDTO transaction) throws BalanceExceptions {
+//		if(!(transaction.getStatus() && transaction.get))
 		return ts.saveTransaction(transaction); 
 	}
+	
+//	@PostMapping("/withdrawal/id/{id}")
+//	public Transactions saveTransaction(@RequestBody TransactionsDTO transaction) throws BalanceExceptions {
+////		if(!(transaction.getStatus() && transaction.get))
+//		return ts.saveTransaction(transaction); 
+//	}
+	
 
 
 }

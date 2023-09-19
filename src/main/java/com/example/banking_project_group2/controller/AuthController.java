@@ -47,6 +47,21 @@ public class AuthController {
 
         return new ResponseEntity<>(savedCustomer, HttpStatus.OK);
     }
+    
+    @PostMapping("/admin")
+
+    public Customer adminLogin(@Valid @RequestBody LoginDTO registerDTO){
+        if(customerRepository.findByUsername(registerDTO.getUsername()) != null){
+            return new Customer(0, "null", "null", 0);
+        }
+
+        Customer customer = new Customer();
+        customer.setUsername(registerDTO.getUsername());
+        customer.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+
+        return customerRepository.save(customer);
+
+    }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody LoginDTO loginDTO){

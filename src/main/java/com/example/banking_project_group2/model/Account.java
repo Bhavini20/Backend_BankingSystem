@@ -54,7 +54,21 @@ public class Account {
 	private String mobile;
 	
 	@Column
+	private boolean status;
+	
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	@Column
 	private Date dob;
+	
+//	@Column
+//	private boolean accStatus;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="cust_id")
