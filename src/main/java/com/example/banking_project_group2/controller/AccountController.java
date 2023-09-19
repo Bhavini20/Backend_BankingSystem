@@ -40,6 +40,7 @@ public class AccountController {
 	public Account addAccount(@Valid @RequestBody AccountDTO account, @RequestHeader(name = "Authorization") String token) {
 		String username = jwtgen.getUsernameFromToken(token.substring(7));
 		Customer customer = cust.findByUsername(username);
+		
 		return accSer.addAccount(account, customer);
 	}
 

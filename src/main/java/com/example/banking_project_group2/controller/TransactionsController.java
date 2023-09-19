@@ -3,6 +3,7 @@ package com.example.banking_project_group2.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,6 +31,8 @@ public class TransactionsController {
 	@Autowired
 	TransactionsService ts;
 	
+	
+	
 	@GetMapping("/viewToTransactions/id/{id}")
 	public List<Transactions> viewToTransactions(@PathVariable int id) {
 		return ts.viewToTransactions(id);
@@ -48,8 +51,16 @@ public class TransactionsController {
 	
 	@PostMapping("/saveTransactions")
 	public Transactions saveTransaction(@RequestBody TransactionsDTO transaction) throws BalanceExceptions {
+//		if(!(transaction.getStatus() && transaction.get))
 		return ts.saveTransaction(transaction); 
 	}
+	
+//	@PostMapping("/withdrawal/id/{id}")
+//	public Transactions saveTransaction(@RequestBody TransactionsDTO transaction) throws BalanceExceptions {
+////		if(!(transaction.getStatus() && transaction.get))
+//		return ts.saveTransaction(transaction); 
+//	}
+	
 
 
 }

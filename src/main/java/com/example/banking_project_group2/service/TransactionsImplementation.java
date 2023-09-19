@@ -46,6 +46,8 @@ public class TransactionsImplementation implements TransactionsService{
 		
 		return trans;
 	}
+	
+	
 
 	public Transactions saveTransaction(TransactionsDTO transaction) throws BalanceExceptions {
 		Transactions t = new Transactions();
@@ -58,6 +60,14 @@ public class TransactionsImplementation implements TransactionsService{
 		int tacc = transaction.getTo_acc();
 		Account t_acc = acc.findById(tacc);
 		
+		
+		
+		if(!f_acc.getStatus())
+			throw new BalanceExceptions("Your account is inactive!");
+		
+		if(!t_acc.getStatus())
+			throw new BalanceExceptions("Receiver's account is Inactive!");
+			
 		t.setFrom_acc(f_acc);
 		t.setTo_acc(t_acc);
 		t.setTrans_time(new Date());

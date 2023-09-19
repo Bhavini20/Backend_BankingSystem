@@ -40,6 +40,7 @@ public class AccountImplementation implements AccountService {
 		ac.setOccupation(account.getOccupation());
 		ac.setDob(account.getDob());
 		ac.setEmailId(account.getEmailId());
+		ac.setStatus(true);
 		ac.setMobile(account.getMobile());
 		return accRepo.save(ac);
 	}
