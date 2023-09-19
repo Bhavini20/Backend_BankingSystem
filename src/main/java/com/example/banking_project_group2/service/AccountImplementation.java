@@ -2,6 +2,7 @@ package com.example.banking_project_group2.service;
 
 import java.util.List;
 
+import com.example.banking_project_group2.dto.StatusDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,6 +54,16 @@ public class AccountImplementation implements AccountService {
 
 		return customer.getAccounts();
 
+	}
+
+	public List<Account> getAllAccounts(){
+		return accRepo.findAll();
+	}
+
+	public Account setAccountStatus(StatusDTO status){
+		Account account = accRepo.findById(status.getAccount_no());
+		account.setStatus(status.getStatus());
+		return accRepo.save(account);
 	}
 
 }
