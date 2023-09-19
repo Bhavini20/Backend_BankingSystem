@@ -15,12 +15,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/auth")
 public class AuthController {
     private AuthenticationManager authenticationManager;
@@ -37,18 +35,17 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-
-    public Customer register(@Valid @RequestBody RegisterDTO registerDTO){
+    public ResponseEntity<Customer> register(@Valid @RequestBody RegisterDTO registerDTO){
         if(customerRepository.findByUsername(registerDTO.getUsername()) != null){
-            return new Customer(0, "null", "null", 0);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
         Customer customer = new Customer();
         customer.setUsername(registerDTO.getUsername());
         customer.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
+        Customer savedCustomer = customerRepository.save(customer);
 
-        return customerRepository.save(customer);
-
+        return new ResponseEntity<>(savedCustomer, HttpStatus.OK);
     }
     
     @PostMapping("/admin")
