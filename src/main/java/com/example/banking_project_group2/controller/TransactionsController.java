@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.banking_project_group2.dto.TransactionsDTO;
 import com.example.banking_project_group2.exceptions.BalanceExceptions;
+import com.example.banking_project_group2.exceptions.ResourceNotFoundException;
 import com.example.banking_project_group2.model.Transactions;
 import com.example.banking_project_group2.repository.AccountRepository;
 import com.example.banking_project_group2.repository.TransactionsRepo;
@@ -32,18 +33,18 @@ public class TransactionsController {
 	
 	
 	@GetMapping("/viewToTransactions/id/{id}")
-	public List<Transactions> viewToTransactions(@PathVariable int id) {
+	public List<Transactions> viewToTransactions(@PathVariable int id) throws ResourceNotFoundException {
 		return ts.viewToTransactions(id);
 	}
 	
 	@GetMapping("/viewFromTransactions/id/{id}")
-	public List<Transactions> viewFromTransactions(@PathVariable int id) {
+	public List<Transactions> viewFromTransactions(@PathVariable int id) throws ResourceNotFoundException{
 		return ts.viewFromTransactions(id);
 	}
 	
 	
-	@GetMapping("/viewAllTransactions/id/{id}")
-	public List<TransactionsResponseDTO> viewAllTransactions(@PathVariable int id){
+	@GetMapping("/viewAllTransactions/id/{id}") 
+	public List<TransactionsResponseDTO> viewAllTransactions(@PathVariable int id) throws BalanceExceptions{
 		return ts.viewAllTransactions(id);
 	}
 	

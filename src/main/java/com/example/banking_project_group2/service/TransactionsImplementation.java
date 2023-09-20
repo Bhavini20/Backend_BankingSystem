@@ -5,12 +5,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
-import com.example.banking_project_group2.dto.TransactionsResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.banking_project_group2.dto.TransactionsDTO;
+import com.example.banking_project_group2.dto.TransactionsResponseDTO;
 import com.example.banking_project_group2.exceptions.BalanceExceptions;
+import com.example.banking_project_group2.exceptions.ResourceNotFoundException;
+import com.example.banking_project_group2.exceptions.ResourceNotFoundException;
 import com.example.banking_project_group2.model.Account;
 import com.example.banking_project_group2.model.Transactions;
 import com.example.banking_project_group2.repository.AccountRepository;
@@ -25,18 +27,26 @@ public class TransactionsImplementation implements TransactionsService{
 	@Autowired
 	TransactionsRepo tc;
 	
-	public List<Transactions> viewToTransactions(int id) {
+	public List<Transactions> viewToTransactions(int id) throws ResourceNotFoundException{
 		Account ac = acc.findById(id);
+		
+		if(ac==null)
+			throw new ResourceNotFoundException("No account found!");
+		
 		return ac.getToTransactions();
 	}
 	
 
-	public List<Transactions> viewFromTransactions( int id) {
+	public List<Transactions> viewFromTransactions( int id) throws ResourceNotFoundException {
 		Account ac = acc.findById(id);
+		
+		if(ac==null)
+			throw new ResourceNotFoundException("No account found!");
+		
 		return ac.getFromTransactions();
 	}
 	
-	public List<TransactionsResponseDTO> viewAllTransactions(int id){
+	public List<TransactionsResponseDTO> viewAllTransactions(int id) throws BalanceExceptions{
 		Account ac = acc.findById(id);
 		List<Transactions> to_trans = ac.getToTransactions();
 		List<Transactions> from_trans = ac.getFromTransactions();
@@ -44,6 +54,9 @@ public class TransactionsImplementation implements TransactionsService{
 		
 		List<TransactionsResponseDTO> trans = new ArrayList<>();
 		allTrans.forEach(t -> trans.add(new TransactionsResponseDTO(t)));
+		
+		if(trans.isEmpty())
+			throw new BalanceExceptions("No transactionsto show!");
 		
 		return trans;
 	}
@@ -58,9 +71,11 @@ public class TransactionsImplementation implements TransactionsService{
 		
 		t.setAmount(transaction.getAmount());
 		
+		if(transaction.getAmount()<0)
+			throw new BalanceExceptions("Amount can't be negative!");
+		
 		int tacc = transaction.getTo_acc();
 		Account t_acc = acc.findById(tacc);
-		
 		
 		
 		if(!f_acc.getStatus())
