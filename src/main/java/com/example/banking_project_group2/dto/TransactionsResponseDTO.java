@@ -63,7 +63,8 @@ public class TransactionsResponseDTO {
 
 		this.amount = T.getAmount();
 		this.from_acc = T.getFrom_acc().getAccount_no();
-		this.to_acc =T.getTo_acc().getAccount_no();
+		if(T.getTo_acc() == null) this.to_acc = -1;
+		else this.to_acc =T.getTo_acc().getAccount_no();
 		this.trans_time = T.getTrans_time();
 		this.transaction_id = T.getTransaction_id();
 		this.status=T.getStatus();
