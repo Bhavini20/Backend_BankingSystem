@@ -85,7 +85,11 @@ public class TransactionsImplementation implements TransactionsService{
 		
 		if(!t_acc.getStatus())
 			throw new BalanceExceptions("Receiver's account is Inactive!");
-			
+
+
+		if(t_acc == f_acc)
+			throw new BalanceExceptions("You cannot transfer to your own account!");
+
 		t.setFrom_acc(f_acc);
 		t.setTo_acc(t_acc);
 		t.setTrans_time(new Date());

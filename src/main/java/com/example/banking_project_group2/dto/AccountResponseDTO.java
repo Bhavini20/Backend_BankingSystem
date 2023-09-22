@@ -12,10 +12,9 @@ import java.util.Date;
 public class AccountResponseDTO {
 
 	private String account_type;
-
-
 	private int account_no;
 	private int balance;
+
 	
 	public int getAccount_no() {
 		return account_no;
@@ -26,32 +25,16 @@ public class AccountResponseDTO {
 	}
 
 	//	  @NotBlank(message = "Customer first name is required")
+
 	private String first_name;
-	
-//	  @NotBlank(message = "Customer last name is required")
 	private String last_name;
-	
-//	  @NotBlank(message = "Address name is required")
 	private String address;
-	
-//	  @NotBlank(message = "Aadhar number is required")
-//	  @Size(min=12, max=12)
-	  private String aadhar_no;
-
-	  private boolean status;
-
+	private String aadhar_no;
+	private boolean status;
 	private String occupation;
-	
-//	@NotBlank(message = "Email id is required")
-//	@Email
 	private String emailId;
-	
-//	  @NotBlank(message = "mobile no is required")
-//	  @Size(min=10, max=10)
 	private String mobile;
-	 
-	
-	  private Date dob;
+	private Date dob;
 
 	public AccountResponseDTO(Account A) {
 
@@ -70,36 +53,6 @@ public class AccountResponseDTO {
 
 	}
 
-//	  private boolean intBanking;
-	
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public boolean getStatus() { return status; }
-
-	public void setStatus(boolean status) { this.status = status; }
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	public Date getDob() {
-		return dob;
-	}
-
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
-
 
 	public String getAccount_type() {
 		return account_type;
@@ -107,6 +60,14 @@ public class AccountResponseDTO {
 
 	public void setAccount_type(String account_type) {
 		this.account_type = account_type;
+	}
+
+	public int getAccount_no() {
+		return account_no;
+	}
+
+	public void setAccount_no(int account_no) {
+		this.account_no = account_no;
 	}
 
 	public int getBalance() {
@@ -149,6 +110,14 @@ public class AccountResponseDTO {
 		this.aadhar_no = aadhar_no;
 	}
 
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
 	public String getOccupation() {
 		return occupation;
 	}
@@ -156,5 +125,28 @@ public class AccountResponseDTO {
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
 	}
-	
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
 }
