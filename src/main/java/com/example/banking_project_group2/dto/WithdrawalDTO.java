@@ -3,6 +3,7 @@ package com.example.banking_project_group2.dto;
 public class WithdrawalDTO {
 	private int amount;
 	private int from_acc;
+	
 	public int getAmount() {
 		return amount;
 	}
