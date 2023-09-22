@@ -1,16 +1,23 @@
 package com.example.banking_project_group2.controller;
 
+import java.util.Date;
 import java.util.List;
 
-import com.example.banking_project_group2.dto.TransactionsResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.banking_project_group2.dto.TransactionsDTO;
+import com.example.banking_project_group2.dto.TransactionsResponseDTO;
+import com.example.banking_project_group2.dto.WithdrawalDTO;
 import com.example.banking_project_group2.exceptions.BalanceExceptions;
 import com.example.banking_project_group2.exceptions.ResourceNotFoundException;
+import com.example.banking_project_group2.model.Account;
 import com.example.banking_project_group2.model.Transactions;
 import com.example.banking_project_group2.repository.AccountRepository;
 import com.example.banking_project_group2.repository.TransactionsRepo;
@@ -54,11 +61,10 @@ public class TransactionsController {
 		return ts.saveTransaction(transaction); 
 	}
 	
-//	@PostMapping("/withdrawal/id/{id}")
-//	public Transactions saveTransaction(@RequestBody TransactionsDTO transaction) throws BalanceExceptions {
-////		if(!(transaction.getStatus() && transaction.get))
-//		return ts.saveTransaction(transaction); 
-//	}
+	@PostMapping("/withdrawal")
+	public Transactions withdraw(@RequestBody WithdrawalDTO transaction) throws BalanceExceptions {
+		return ts.withdraw(transaction); 
+	}
 	
 
 

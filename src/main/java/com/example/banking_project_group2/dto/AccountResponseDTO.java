@@ -17,7 +17,15 @@ public class AccountResponseDTO {
 	private int account_no;
 	private int balance;
 	
-//	  @NotBlank(message = "Customer first name is required")
+	public int getAccount_no() {
+		return account_no;
+	}
+
+	public void setAccount_no(int account_no) {
+		this.account_no = account_no;
+	}
+
+	//	  @NotBlank(message = "Customer first name is required")
 	private String first_name;
 	
 //	  @NotBlank(message = "Customer last name is required")

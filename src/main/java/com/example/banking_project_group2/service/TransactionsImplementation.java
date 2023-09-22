@@ -7,9 +7,11 @@ import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.banking_project_group2.dto.TransactionsDTO;
 import com.example.banking_project_group2.dto.TransactionsResponseDTO;
+import com.example.banking_project_group2.dto.WithdrawalDTO;
 import com.example.banking_project_group2.exceptions.BalanceExceptions;
 import com.example.banking_project_group2.exceptions.ResourceNotFoundException;
 import com.example.banking_project_group2.exceptions.ResourceNotFoundException;
@@ -102,5 +104,39 @@ public class TransactionsImplementation implements TransactionsService{
 
 		return tc.save(t); 
 	}
+	
+	public Transactions withdraw(WithdrawalDTO transaction) throws BalanceExceptions {
+		
+		Transactions t = new Transactions();
+		
+		int facc = transaction.getFrom_acc();
+		Account f_acc = acc.findById(facc);
+		
+		t.setAmount(transaction.getAmount());
+		
+		if(transaction.getAmount()<0)
+			throw new BalanceExceptions("Amount can't be negative!");
+		
+		if(!f_acc.getStatus())
+			throw new BalanceExceptions("Your account is inactive!");
+	
+			
+		t.setFrom_acc(f_acc);
+		t.setTo_acc(null);
+		t.setTrans_time(new Date());
+		
+		if(f_acc.getBalance()-transaction.getAmount()<0) {
+			t.setStatus(false);
+			tc.save(t); 
+			throw new BalanceExceptions("Insufficient Balance!");
+		}
+		else {
+			f_acc.setBalance(f_acc.getBalance()-transaction.getAmount());
+			t.setStatus(true);
+		}
+	
+		return tc.save(t);  
+	}
+	
 
 }
