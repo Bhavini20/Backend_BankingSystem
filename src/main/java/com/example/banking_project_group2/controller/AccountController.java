@@ -42,14 +42,16 @@ public class AccountController {
 	}
 
 	@GetMapping("/viewAccounts")
-	public List<Account> viewAccounts(@Valid @RequestHeader(name = "Authorization") String token) {
+	public List<Account> viewAccounts(@Valid @RequestHeader(name = "Authorization") String token)
+	{
+		System.out.println("[/viewAccounts]");
 		String username = jwtgen.getUsernameFromToken(token.substring(7));
 		return accSer.viewAccounts(username);
 	}
 
 	@GetMapping("/viewAccountNumbers")
 	public List<Integer> viewAccountNumbers(@Valid @RequestHeader(name = "Authorization") String token){
-
+    
 		String username = jwtgen.getUsernameFromToken(token.substring(7));
 		List<Account> accounts = accSer.viewAccounts(username);
 

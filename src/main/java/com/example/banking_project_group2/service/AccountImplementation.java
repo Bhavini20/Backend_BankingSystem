@@ -50,6 +50,7 @@ public class AccountImplementation implements AccountService {
 	public List<Account> viewAccounts(String username) {
 
 		System.out.println("[/viewAccounts]");
+
 		Customer customer = cust.findByUsername(username);
 
 		return customer.getAccounts();

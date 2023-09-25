@@ -15,8 +15,6 @@ public class AccountResponseDTO {
 	private int account_no;
 	private int balance;
 
-
-
 	//	  @NotBlank(message = "Customer first name is required")
 
 	private String first_name;
