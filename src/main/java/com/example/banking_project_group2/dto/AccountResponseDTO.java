@@ -16,13 +16,13 @@ public class AccountResponseDTO {
 	private int balance;
 
 	
-	public int getAccount_no() {
-		return account_no;
-	}
-
-	public void setAccount_no(int account_no) {
-		this.account_no = account_no;
-	}
+//	public int getAccount_no() {
+//		return account_no;
+//	}
+//
+//	public void setAccount_no(int account_no) {
+//		this.account_no = account_no;
+//	}
 
 	//	  @NotBlank(message = "Customer first name is required")
 
