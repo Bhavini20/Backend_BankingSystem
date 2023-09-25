@@ -1,9 +1,10 @@
 package com.example.banking_project_group2.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.banking_project_group2.dto.TransactionsDTO;
 import com.example.banking_project_group2.dto.TransactionsResponseDTO;
 import com.example.banking_project_group2.dto.WithdrawalDTO;
 import com.example.banking_project_group2.exceptions.BalanceExceptions;
 import com.example.banking_project_group2.exceptions.ResourceNotFoundException;
-import com.example.banking_project_group2.model.Account;
 import com.example.banking_project_group2.model.Transactions;
 import com.example.banking_project_group2.repository.AccountRepository;
 import com.example.banking_project_group2.repository.TransactionsRepo;
@@ -57,8 +58,21 @@ public class TransactionsController {
 	
 	@PostMapping("/saveTransactions")
 	public Transactions saveTransaction(@RequestBody TransactionsDTO transaction) throws BalanceExceptions {
-//		if(!(transaction.getStatus() && transaction.get))
-		return ts.saveTransaction(transaction); 
+////		if(!(transaction.getStatus() && transaction.get))
+//		try {
+//			Transactions t = ts.saveTransaction(transaction);
+//			
+//			return new ResponseEntity<>(t, HttpStatus.OK);
+//		} catch (BalanceExceptions e) {
+////			console.log()
+//			System.out.println(e.getMessage());
+//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+////			return new ResponseEntity<>(HttpStatus.BAD_REQUEST, e.getMessage());
+//		}
+
+//			Transactions t = new Transactions()
+			return ts.saveTransaction(transaction);
+//		return t;
 	}
 	
 	@PostMapping("/withdrawal")

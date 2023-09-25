@@ -51,7 +51,7 @@ public class AccountController {
 
 	@GetMapping("/viewAccountNumbers")
 	public List<Integer> viewAccountNumbers(@Valid @RequestHeader(name = "Authorization") String token){
-	
+    
 		String username = jwtgen.getUsernameFromToken(token.substring(7));
 		List<Account> accounts = accSer.viewAccounts(username);
 

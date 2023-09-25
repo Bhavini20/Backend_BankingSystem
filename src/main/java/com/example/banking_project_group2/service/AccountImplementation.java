@@ -49,8 +49,8 @@ public class AccountImplementation implements AccountService {
 	
 	public List<Account> viewAccounts(String username) {
 
-//		System.out.println("[/viewAccounts]");
-//		String username = jwtgen.getUsernameFromToken(token.substring(7));
+		System.out.println("[/viewAccounts]");
+
 		Customer customer = cust.findByUsername(username);
 
 		return customer.getAccounts();
