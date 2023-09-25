@@ -43,9 +43,31 @@ public class AccountDTO {
 	  
 //	  private boolean intBanking;
 	
+	  
+
 	public String getEmailId() {
 		return emailId;
 	}
+
+	public AccountDTO(String account_type, int balance,
+		@NotBlank(message = "Customer first name is required") String first_name,
+		@NotBlank(message = "Customer last name is required") String last_name,
+		@NotBlank(message = "Address name is required") String address,
+		@NotBlank(message = "Aadhar number is required") @Size(min = 12, max = 12) String aadhar_no, String occupation,
+		@NotBlank(message = "Email id is required") @Email String emailId,
+		@NotBlank(message = "mobile no is required") @Size(min = 10, max = 10) String mobile, Date dob) {
+	super();
+	this.account_type = account_type;
+	this.balance = balance;
+	this.first_name = first_name;
+	this.last_name = last_name;
+	this.address = address;
+	this.aadhar_no = aadhar_no;
+	this.occupation = occupation;
+	this.emailId = emailId;
+	this.mobile = mobile;
+	this.dob = dob;
+}
 
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;

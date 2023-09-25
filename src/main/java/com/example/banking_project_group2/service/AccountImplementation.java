@@ -47,10 +47,10 @@ public class AccountImplementation implements AccountService {
 		return accRepo.save(ac);
 	}
 	
-	public List<Account> viewAccounts(@RequestHeader(name = "Authorization") String token) {
+	public List<Account> viewAccounts(String username) {
 
 		System.out.println("[/viewAccounts]");
-		String username = jwtgen.getUsernameFromToken(token.substring(7));
+
 		Customer customer = cust.findByUsername(username);
 
 		return customer.getAccounts();

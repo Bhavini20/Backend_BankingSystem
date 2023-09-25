@@ -3,8 +3,15 @@ package com.example.banking_project_group2.dto;
 public class WithdrawalDTO {
 	private int amount;
 	private int from_acc;
-	
-	public int getAmount() {
+
+    public WithdrawalDTO(int amount, int from_acc) {
+
+		this.amount = amount;
+		this.from_acc = from_acc;
+
+	}
+
+    public int getAmount() {
 		return amount;
 	}
 	public void setAmount(int amount) {

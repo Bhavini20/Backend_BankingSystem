@@ -70,6 +70,10 @@ public class Customer {
 	public List<Account> getAccounts(){
 		return account;
 	}
+	
+	public void setAccounts(List<Account> ac) {
+		this.account = ac;
+	}
 
 	public Customer(int id, String username, String password, int age) {
 		super();
