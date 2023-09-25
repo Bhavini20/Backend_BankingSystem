@@ -1,19 +1,22 @@
 package com.example.banking_project_group2.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.example.banking_project_group2.dto.StatusDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.banking_project_group2.dto.AccountDTO;
@@ -112,7 +115,29 @@ public class AccountTest {
 		
 	}
 	
-	
+	@Test
+	public void setStatus() throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Customer test_from_cust = new Customer(1, "test_from_cust", "password", 20);;
+		Account test_acc = new Account(1, "Savings", 2000, "Test",
+				"One", "Test add", "123456789012", "Test Occ",
+				"test1@mail.com", "1234567890", dateFormat.parse("29/04/2001"), test_from_cust);
+		test_acc.setStatus(false);
+		Account ans_acc = new Account(1, "Savings", 2000, "Test",
+				"One", "Test add", "123456789012", "Test Occ",
+				"test1@mail.com", "1234567890", dateFormat.parse("29/04/2001"), test_from_cust);
+		ans_acc.setStatus(true);
+
+		when(accRepo.findById(1)).thenReturn(test_acc);
+		when(accRepo.save(any(Account.class))).thenReturn(ans_acc);
+
+		StatusDTO statusDTO = new StatusDTO(true, 1);
+
+		Account reply_acc = accSer.setAccountStatus(statusDTO);
+
+		assertEquals(reply_acc.getAccount_no(), 1);
+        assertTrue(reply_acc.getStatus());
+	}
 	
 	
 	

@@ -86,7 +86,11 @@ public class Account {
 	public List<Transactions> getToTransactions(){
 		return to_transaction;
 	}
-	
+
+	public void setTo_transaction(List<Transactions> to_transaction) { this.to_transaction = to_transaction; }
+
+	public void setFrom_transaction(List<Transactions> from_transaction) { this.from_transaction = from_transaction; }
+
 	public List<Transactions> getFromTransactions(){
 		return from_transaction;
 	}

@@ -18,6 +18,12 @@ public class TransactionsDTO {
 	private int from_acc;
 	private int to_acc;
 
+	public TransactionsDTO(int amount, int from_acc, int to_acc) {
+		this.amount = amount;
+		this.from_acc = from_acc;
+		this.to_acc = to_acc;
+	}
+
 
 	public int getAmount() {
 		return amount;

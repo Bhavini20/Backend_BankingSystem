@@ -61,6 +61,15 @@ public class Transactions{
 		this.amount = amount;
 		this.status = status;
 	}
+
+	public Transactions(int transaction_id, Date trans_time, int amount, Account from_acc, Account to_acc) {
+		super();
+		this.transaction_id = transaction_id;
+		this.trans_time = trans_time;
+		this.from_acc = from_acc;
+		this.to_acc = to_acc;
+		this.amount = amount;
+	}
 	
 	
 
