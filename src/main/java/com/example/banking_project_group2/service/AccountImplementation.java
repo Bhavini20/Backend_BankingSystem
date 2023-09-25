@@ -30,6 +30,7 @@ public class AccountImplementation implements AccountService {
 	public Account addAccount(AccountDTO account, Customer customer) {
 //		int custId = account.getCust_id();
 //		Customer customer = cust.findById(custId);
+		System.out.println("In addAccountService");
 		Account ac = new Account();
 		ac.setAadhar_no(account.getAadhar_no());
 		ac.setAccount_type(account.getAccount_type());
