@@ -50,6 +50,7 @@ public class TransactionsImplementation implements TransactionsService{
 	
 	public List<TransactionsResponseDTO> viewAllTransactions(int id) throws BalanceExceptions{
 		Account ac = acc.findById(id);
+		
 		List<Transactions> to_trans = ac.getToTransactions();
 		List<Transactions> from_trans = ac.getFromTransactions();
 		List<Transactions> allTrans = Stream.concat(to_trans.stream(),from_trans.stream()).toList();
