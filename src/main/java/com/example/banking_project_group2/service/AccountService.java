@@ -15,4 +15,5 @@ public interface AccountService {
 	public List<Account> getAllAccounts();
 
 	public Account setAccountStatus(StatusDTO status);
+	public int getBalance(int id);
 }

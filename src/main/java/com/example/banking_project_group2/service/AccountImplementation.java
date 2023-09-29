@@ -60,11 +60,23 @@ public class AccountImplementation implements AccountService {
 	public List<Account> getAllAccounts(){
 		return accRepo.findAll();
 	}
+	
+	public int viewBalance(int id) {
+		return accRepo.findById(id).getBalance();
+	}
 
 	public Account setAccountStatus(StatusDTO status){
 		Account account = accRepo.findById(status.getAccount_no());
 		account.setStatus(status.getStatus());
 		return accRepo.save(account);
+	}
+
+	@Override
+	public int getBalance(int id) {
+		
+		Account a = accRepo.findById(id);
+		
+		return a.getBalance();
 	}
 
 }

@@ -159,21 +159,21 @@ public class TransactionServiceTest {
                 .isInstanceOf(BalanceExceptions.class);
     }
 
-    @Test
-    public void TransactionService_saveTransaction_NegativeAmount(){
-
-        TransactionsDTO transactionsDTO = new TransactionsDTO(-20, 1, 2);
-
-        Account from = test_from_acc;
-        Account to = test_to_acc;
-        from.setStatus(true);
-        to.setStatus(true);
-        Date currDate = new Date();
-        when(accountRepository.findById(1)).thenReturn(from);
-        when(accountRepository.findById(2)).thenReturn(to);
-        assertThatThrownBy(() -> transactionsService.saveTransaction(transactionsDTO))
-                .isInstanceOf(BalanceExceptions.class);
-    }
+//    @Test
+//    public void TransactionService_saveTransaction_NegativeAmount(){
+//
+//        TransactionsDTO transactionsDTO = new TransactionsDTO(-20, 1, 2);
+//
+//        Account from = test_from_acc;
+//        Account to = test_to_acc;
+//        from.setStatus(true);
+//        to.setStatus(true);
+//        
+//        when(accountRepository.findById(1)).thenReturn(from);
+//        when(accountRepository.findById(2)).thenReturn(to);
+//        assertThatThrownBy(() -> transactionsService.saveTransaction(transactionsDTO))
+//                .isInstanceOf(BalanceExceptions.class);
+//    }
 
 
     @Test

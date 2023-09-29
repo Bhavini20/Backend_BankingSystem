@@ -58,21 +58,8 @@ public class TransactionsController {
 	
 	@PostMapping("/saveTransactions")
 	public Transactions saveTransaction(@RequestBody TransactionsDTO transaction) throws BalanceExceptions {
-////		if(!(transaction.getStatus() && transaction.get))
-//		try {
-//			Transactions t = ts.saveTransaction(transaction);
-//			
-//			return new ResponseEntity<>(t, HttpStatus.OK);
-//		} catch (BalanceExceptions e) {
-////			console.log()
-//			System.out.println(e.getMessage());
-//			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-////			return new ResponseEntity<>(HttpStatus.BAD_REQUEST, e.getMessage());
-//		}
 
-//			Transactions t = new Transactions()
 			return ts.saveTransaction(transaction);
-//		return t;
 	}
 	
 	@PostMapping("/withdrawal")
