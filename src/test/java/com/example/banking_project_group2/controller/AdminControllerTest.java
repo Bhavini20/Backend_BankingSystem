@@ -16,6 +16,8 @@ import com.example.banking_project_group2.model.Customer;
 import com.example.banking_project_group2.security.JWTGen;
 import com.example.banking_project_group2.service.AccountService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,7 +35,6 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 //import static reactor.core.publisher.Mono.when;

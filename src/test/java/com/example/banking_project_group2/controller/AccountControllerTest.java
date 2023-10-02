@@ -1,6 +1,7 @@
 package com.example.banking_project_group2.controller;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,6 +34,7 @@ import com.example.banking_project_group2.repository.CustomerRepository;
 import com.example.banking_project_group2.security.JWTGen;
 import com.example.banking_project_group2.service.AccountService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.test.web.servlet.MvcResult;
 
 //@Component("test_jwt")
 //class JWTGenTest extends JWTGen{
@@ -164,5 +166,22 @@ public class AccountControllerTest {
 
 
     }
+
+    @Test
+    public void AccountController_GetBalance() throws Exception {
+        int id = 1;
+        when(jwtgen.getUsernameFromToken(Mockito.anyString())).thenReturn("testuser1");
+        when(accountService.getBalance(id)).thenReturn(test_from_acc.getBalance());
+
+        MvcResult result = mvc.perform(get("/api/account/viewBalance/" + id)
+                .header("Authorization", "test.jwt.t0k3n")
+        )
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertEquals(result.getResponse().getContentAsString(), "2000");
+
+    }
+
 
 }

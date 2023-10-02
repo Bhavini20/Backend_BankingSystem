@@ -4,6 +4,7 @@ import com.example.banking_project_group2.dto.TransactionsDTO;
 import com.example.banking_project_group2.dto.TransactionsResponseDTO;
 import com.example.banking_project_group2.dto.WithdrawalDTO;
 import com.example.banking_project_group2.exceptions.BalanceExceptions;
+import com.example.banking_project_group2.exceptions.ResourceNotFoundException;
 import com.example.banking_project_group2.model.Account;
 import com.example.banking_project_group2.model.Customer;
 import com.example.banking_project_group2.model.Transactions;
@@ -46,23 +47,43 @@ public class TransactionServiceTest {
     Customer test_to_cust;
     Account test_from_acc;
     Account test_to_acc;
+    Transactions t;
+
+//    @BeforeEach
+//    public void init() throws ParseException {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        test_from_cust = new Customer(1, "test_from_cust", "password", 20);
+//        test_from_acc = new Account(1, "Savings", 2000, "Test",
+//                "One", "Test add", "123456789012", "Test Occ",
+//                "test1@mail.com", "1234567890", dateFormat.parse("29/04/2001"), test_from_cust);
+//
+//
+//        test_to_cust = new Customer(2, "test_to_cust", "password", 20);
+//        test_to_acc = new Account(2, "Salary", 2000, "Test",
+//                "Two", "Test add", "123456789012", "Test Occ",
+//                "test2@mail.com", "1234567890", dateFormat.parse("29/04/2001"), test_to_cust);
+//
+//
+//    }
 
     @BeforeEach
     public void init() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        test_from_cust = new Customer(1, "test_from_cust", "password", 20);
+        test_from_cust = new Customer(1, "testuser1", "password", 20);
         test_from_acc = new Account(1, "Savings", 2000, "Test",
                 "One", "Test add", "123456789012", "Test Occ",
                 "test1@mail.com", "1234567890", dateFormat.parse("29/04/2001"), test_from_cust);
 
-
-        test_to_cust = new Customer(2, "test_to_cust", "password", 20);
+        test_from_cust.setAccounts(List.of(test_from_acc));
+        test_to_cust = new Customer(2, "testuser2", "password", 20);
         test_to_acc = new Account(2, "Salary", 2000, "Test",
                 "Two", "Test add", "123456789012", "Test Occ",
                 "test2@mail.com", "1234567890", dateFormat.parse("29/04/2001"), test_to_cust);
+        test_to_cust.setAccounts(List.of(test_to_acc));
 
-
+        t = new Transactions(1, new Date(),2000, test_from_acc, test_to_acc, true);
     }
+
     @Test
     public void TransactionService_saveTransaction_Saved(){
 
@@ -296,5 +317,76 @@ public class TransactionServiceTest {
                 .isInstanceOf(BalanceExceptions.class);
     }
 
+    @Test
+    public void TransactionService_ToTransactions(){
+        int id = 2;
+        Account a = test_to_acc;
+        a.setTo_transaction(List.of(t));
+        when(accountRepository.findById(id)).thenReturn(a);
+
+        List<Transactions> transactions;
+
+        try {
+            transactions = transactionsService.viewToTransactions(id);
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(transactions);
+
+        assertNotNull(transactions);
+        assertEquals(transactions.size(), 1);
+
+    }
+
+    @Test
+    public void TransactionService_FromTransactions(){
+        int id = 1;
+        Account a = test_from_acc;
+        a.setFrom_transaction(List.of(t));
+        when(accountRepository.findById(id)).thenReturn(a);
+
+        List<Transactions> transactions;
+
+        try {
+            transactions = transactionsService.viewFromTransactions(id);
+        } catch (ResourceNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(transactions);
+
+        assertNotNull(transactions);
+        assertEquals(transactions.size(), 1);
+
+    }
+
+    @Test
+    public void TransactionService_FromTransactions_NullAcc(){
+        int id = 3;
+        Account a = test_from_acc;
+        a.setFrom_transaction(List.of(t));
+        when(accountRepository.findById(id)).thenReturn(null);
+
+        List<Transactions> transactions;
+
+        assertThatThrownBy(() -> transactionsService.viewFromTransactions(id))
+                .isInstanceOf(ResourceNotFoundException.class);
+
+    }
+
+    @Test
+    public void TransactionService_ToTransactions_NullAcc(){
+        int id = 3;
+        Account a = test_to_acc;
+        a.setTo_transaction(List.of(t));
+        when(accountRepository.findById(id)).thenReturn(null);
+
+        List<Transactions> transactions;
+
+        assertThatThrownBy(() -> transactionsService.viewToTransactions(id))
+                .isInstanceOf(ResourceNotFoundException.class);
+
+    }
 
 }

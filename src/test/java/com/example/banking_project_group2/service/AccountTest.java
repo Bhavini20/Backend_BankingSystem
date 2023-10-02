@@ -139,7 +139,22 @@ public class AccountTest {
         assertTrue(reply_acc.getStatus());
 	}
 	
-	
+	@Test
+	public void getBalance() throws ParseException {
+		int id = 1;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Customer test_from_cust = new Customer(1, "test_from_cust", "password", 20);;
+		Account test_acc = new Account(1, "Savings", 2000, "Test",
+				"One", "Test add", "123456789012", "Test Occ",
+				"test1@mail.com", "1234567890", dateFormat.parse("29/04/2001"), test_from_cust);
+		test_acc.setStatus(false);
+		when(accRepo.findById(id)).thenReturn(test_acc);
+
+		int balance = accSer.getBalance(id);
+
+		assertEquals(balance, test_acc.getBalance());
+
+	}
 	
 	
 	

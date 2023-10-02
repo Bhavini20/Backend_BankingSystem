@@ -61,10 +61,6 @@ public class AccountImplementation implements AccountService {
 		return accRepo.findAll();
 	}
 	
-	public int viewBalance(int id) {
-		return accRepo.findById(id).getBalance();
-	}
-
 	public Account setAccountStatus(StatusDTO status){
 		Account account = accRepo.findById(status.getAccount_no());
 		account.setStatus(status.getStatus());
